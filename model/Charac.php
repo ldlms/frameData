@@ -109,7 +109,26 @@ class Charac extends BddConnect{
         $this->character_charac = $character;
     }
 
+    public function add(){
+        try{
+            $id_charac = $this->getId();
+            $hp_charac = $this->getHp();
+            $throwRange_charac = $this->getThrowRange();
+            $fwdWalkSpeed_charac = $this->getFwdWalkSpeed();
+            $backWalkSpeed_charac = $this->getBackWalkSpeed();
+            $fwdDashSpeed_charac = $this->getFwdDashSpeed();
+            $backDashSpeed_charac = $this->getBackDashSpeed();
+            $fwdDashDistance_charac = $this->getFwdDashDistance();
+            $backDashDistance_charac = $this->getBackDashDistance();
+            $jumpSpeed_charac = $this->getJumpSpeed();
+            $fwdJumpDistance_charac;
+            $backJumpDistance_charac;
+            $jumpApex_charac;
 
+        }catch(\ErrorException $e){
+            die("erreur dans la fonction add".$e->getMessage());
+        }
+    }
 
 }
 

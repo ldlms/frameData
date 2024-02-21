@@ -1,0 +1,7 @@
+# Activation du rewrite des URL
+RewriteEngine On
+# base du projet (emplacement à partir de la racine du serveur)
+RewriteBase /frameData
+# si ce n'est pas un répertoire
+# Si ce n'est pas un fichier
+RewriteRule ^(.+)$ index.php [QSA,L]
