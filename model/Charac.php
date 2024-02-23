@@ -111,7 +111,9 @@ class Charac extends BddConnect{
 
     public function add(){
         try{
-            $id_charac = $this->getId();
+            $requete = "INSERT INTO charac (hp_charac,throwRange_charac,fwdWalkSpeed_charac,backWalkSpeed_charac,fwdDashSpeed_charac,
+                        backDashSpeed_charac,fwdDashDistance_charac,backDashDistance_charac,jumpSpeed_charac,fwdJumpDistance_charac,backJumpDistance_charac,jumpApex_charac,character_charac)
+                        VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
             $hp_charac = $this->getHp();
             $throwRange_charac = $this->getThrowRange();
             $fwdWalkSpeed_charac = $this->getFwdWalkSpeed();
@@ -121,9 +123,26 @@ class Charac extends BddConnect{
             $fwdDashDistance_charac = $this->getFwdDashDistance();
             $backDashDistance_charac = $this->getBackDashDistance();
             $jumpSpeed_charac = $this->getJumpSpeed();
-            $fwdJumpDistance_charac;
-            $backJumpDistance_charac;
-            $jumpApex_charac;
+            $fwdJumpDistance_charac = $this->getFwdJumpDistance();
+            $backJumpDistance_charac = $this->getBackJumpDistance();
+            $jumpApex_charac = $this->getJumpApex();
+            $character_charac = $this->character_charac->getId();
+            $req = $this->connexion()->prepare($requete);
+            $req->bindParam(1,$hp_charac,\PDO::PARAM_INT);
+            $req->bindParam(2,$throwRange_charac,\PDO::PARAM_INT);
+            $req->bindParam(3,$fwdWalkSpeed_charac,\PDO::PARAM_INT);
+            $req->bindParam(4,$backWalkSpeed_charac,\PDO::PARAM_INT);
+            $req->bindParam(5,$fwdDashSpeed_charac,\PDO::PARAM_INT);
+            $req->bindParam(6,$backDashSpeed_charac,\PDO::PARAM_INT);
+            $req->bindParam(7,$fwdDashDistance_charac,\PDO::PARAM_INT);
+            $req->bindParam(8,$backDashDistance_charac,\PDO::PARAM_INT);
+            $req->bindParam(9,$jumpSpeed_charac,\PDO::PARAM_STR_CHAR);
+            $req->bindParam(10,$fwdJumpDistance_charac,\PDO::PARAM_INT);
+            $req->bindParam(11,$backJumpDistance_charac,\PDO::PARAM_INT);
+            $req->bindParam(12,$jumpApex_charac,\PDO::PARAM_INT);
+            $req->bindParam(13,$character_charac,\PDO::PARAM_INT);
+            $req->execute();
+
 
         }catch(\ErrorException $e){
             die("erreur dans la fonction add".$e->getMessage());
