@@ -136,7 +136,7 @@ class Charac extends BddConnect{
             $req->bindParam(6,$backDashSpeed_charac,\PDO::PARAM_INT);
             $req->bindParam(7,$fwdDashDistance_charac,\PDO::PARAM_INT);
             $req->bindParam(8,$backDashDistance_charac,\PDO::PARAM_INT);
-            $req->bindParam(9,$jumpSpeed_charac,\PDO::PARAM_STR_CHAR);
+            $req->bindParam(9,$jumpSpeed_charac,\PDO::PARAM_STR);
             $req->bindParam(10,$fwdJumpDistance_charac,\PDO::PARAM_INT);
             $req->bindParam(11,$backJumpDistance_charac,\PDO::PARAM_INT);
             $req->bindParam(12,$jumpApex_charac,\PDO::PARAM_INT);
@@ -147,6 +147,21 @@ class Charac extends BddConnect{
         }catch(\ErrorException $e){
             die("erreur dans la fonction add".$e->getMessage());
         }
+    }
+
+    public function findAll(){
+        try{
+            $requete = "SELECT hp_charac,throwRange_charac,fwdWalkSpeed_charac,backWalkSpeed_charac,fwdDashSpeed_charac,
+            backDashSpeed_charac,fwdDashDistance_charac,backDashDistance_charac,jumpSpeed_charac,fwdJumpDistance_charac,backJumpDistance_charac,jumpApex_charac,character_charac FROM Charac";
+            $req = $this->connexion()->prepare($requete);
+            return $req->fetchAll(\PDO::FETCH_CLASS|\PDO::FETCH_PROPS_LATE,Charac::class);
+        }catch(\ErrorException $e ){
+            die("erreur dans la méthode findAll".$e->getMessage());
+        }
+    }
+
+    public function find(){
+
     }
 
 }

@@ -52,7 +52,7 @@ class Character extends BddConnect{
 
     public function findAll(){
         try {
-            $req = $this->connexion()->prepare('SELECT nom_character,image_character FROM character');
+            $req = $this->connexion()->prepare('SELECT nom_character,image_character FROM `character`');
             $req->execute();
             return $req->fetchAll(\PDO::FETCH_CLASS|\PDO::FETCH_PROPS_LATE, Character::class);
         } catch(\Exception $e){
