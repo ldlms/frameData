@@ -30,6 +30,9 @@ class Charac extends BddConnect{
     public function getId():int{
         return $this->id_charac;
     }
+    public function setId(?int $id):void{
+        $this->id_charac = $id;
+    }
     public function getHp():?int{
         return $this->hp_charac;
     }
@@ -161,7 +164,34 @@ class Charac extends BddConnect{
     }
 
     public function find(){
-
+        try{
+            $requete = "SELECT id_charac FROM Charac WHERE id_charac=?";
+            $requete2 = "SELECT id_charac,hp_charac,throwRange_charac,fwdWalkSpeed_charac,backWalkSpeed_charac,fwdDashSpeed_charac,
+            backDashSpeed_charac,fwdDashDistance_charac,backDashDistance_charac,jumpSpeed_charac,fwdJumpDistance_charac,backJumpDistance_charac,jumpApex_charac,
+            character_charac AS character_id,nom_character AS nom, image_character AS `image`,
+            FROM charac 
+            INNER JOIN `character` AS `character` ON charac.character_charac = `character`.nom_character  
+            WHERE id_charac=? ";
+            $id = $this->getId();
+            $req = $this->connexion()->prepare($requete);
+            $req->bindParam(1,$id,\PDO::PARAM_INT);
+            $req->execute();
+            if($req->fetch()){
+                $req = $this->connexion()->prepare($requete2);
+                $req->bindParam(1,$id,\PDO::PARAM_INT);
+                $req->execute();
+                $req->setFetchMode(\PDO::FETCH_CLASS|\PDO::FETCH_PROPS_LATE,Charac::class);
+                $charac = $req->fetch();
+                $charac->getCharacterCharac()->setId($charac->peronnage);
+                $charac->getCharacterCharac()->setNomCharacter($charac->nom);
+                $charac->getCharacterCharac()->setImageCharacter($charac->image);
+            }else{
+                $charac = null;
+            }
+            return $charac;
+        }catch(\Exception $e){
+            die("erreur dans la fonction find".$e->getMessage());
+        }
     }
 
 }

@@ -17,6 +17,10 @@ class Character extends BddConnect{
         return $this->idCharacter;
     }
 
+    public function setId(?int $id){
+        $this->idCharacter = $id;
+    }
+
     public function getNomCharacter():?string{
         return $this->nomCharacter;
     }
