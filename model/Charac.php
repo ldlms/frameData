@@ -2,12 +2,14 @@
 
 namespace frameData\model;
 
-include './utils/connectBdd.php';
-include './model/Character.php';
+require './utils/connectBdd.php';
+require './model/Character.php';
+
 use frameData\utils\BddConnect;
 use frameData\model\Character;
 
-class Charac extends BddConnect{
+class Charac extends BddConnect
+{
 
     private int $id_charac;
     private ?int $hp_charac;
@@ -24,96 +26,126 @@ class Charac extends BddConnect{
     private ?float $jumpApex_charac;
     private ?Character $character_charac;
 
-    public function __construct(){
+    public function __construct()
+    {
         $this->character_charac = new Character;
     }
-    public function getId():int{
+    public function getId(): int
+    {
         return $this->id_charac;
     }
-    public function setId(?int $id):void{
+    public function setId(?int $id): void
+    {
         $this->id_charac = $id;
     }
-    public function getHp():?int{
+    public function getHp(): ?int
+    {
         return $this->hp_charac;
     }
-    public function setHp(?int $hp):void{
+    public function setHp(?int $hp): void
+    {
         $this->hp_charac = $hp;
     }
-    public function getThrowRange():?float{
+    public function getThrowRange(): ?float
+    {
         return $this->throwRange_charac;
     }
-    public function setThrowRange(?float $throwRange):void{
+    public function setThrowRange(?float $throwRange): void
+    {
         $this->throwRange_charac = $throwRange;
     }
-    public function getFwdWalkSpeed():?float{
+    public function getFwdWalkSpeed(): ?float
+    {
         return $this->fwdWalkSpeed_charac;
     }
-    public function setFwdWalkSpeed(?float $fwdWalkSpeed):void{
+    public function setFwdWalkSpeed(?float $fwdWalkSpeed): void
+    {
         $this->fwdWalkSpeed_charac = $fwdWalkSpeed;
     }
-    public function getBackWalkSpeed():?float{
+    public function getBackWalkSpeed(): ?float
+    {
         return $this->backWalkSpeed_charac;
     }
-    public function setBackWalkSpeed(?float $backWalkSpeed):void{
+    public function setBackWalkSpeed(?float $backWalkSpeed): void
+    {
         $this->backWalkSpeed_charac = $backWalkSpeed;
     }
-    public function getFwdDashSpeed():?int{
+    public function getFwdDashSpeed(): ?int
+    {
         return $this->fwdDashSpeed_charac;
     }
-    public function setFwdDashSpeed(?int $fwdDashSpeed):void{
+    public function setFwdDashSpeed(?int $fwdDashSpeed): void
+    {
         $this->fwdDashSpeed_charac = $fwdDashSpeed;
     }
-    public function getBackDashSpeed():?int{
+    public function getBackDashSpeed(): ?int
+    {
         return $this->backDashSpeed_charac;
     }
-    public function setBAckDashSpeed(?int $backDashSpeed):void{
+    public function setBAckDashSpeed(?int $backDashSpeed): void
+    {
         $this->backDashSpeed_charac = $backDashSpeed;
     }
-    public function getFwdDashDistance():?float{
+    public function getFwdDashDistance(): ?float
+    {
         return $this->fwdDashDistance_charac;
     }
-    public function setFwdDashDisatance($fwdDashDistance):void{
+    public function setFwdDashDisatance($fwdDashDistance): void
+    {
         $this->fwdDashDistance_charac = $fwdDashDistance;
     }
-    public function getBackDashDistance():?float{
+    public function getBackDashDistance(): ?float
+    {
         return $this->backDashDistance_charac;
     }
-    public function setBackDashDistance($backDashDistance):void{
+    public function setBackDashDistance($backDashDistance): void
+    {
         $this->backDashDistance_charac = $backDashDistance;
     }
-    public function getJumpSpeed():?string{
+    public function getJumpSpeed(): ?string
+    {
         return $this->jumpSpeed_charac;
     }
-    public function setJumpSpeed($jumpSpeed):void{
+    public function setJumpSpeed($jumpSpeed): void
+    {
         $this->jumpSpeed_charac = $jumpSpeed;
     }
-    public function getFwdJumpDistance():?float{
+    public function getFwdJumpDistance(): ?float
+    {
         return $this->fwdJumpDistance_charac;
     }
-    public function setFwdJumpDistance($fwdJumpDistance):void{
+    public function setFwdJumpDistance($fwdJumpDistance): void
+    {
         $this->fwdJumpDistance_charac = $fwdJumpDistance;
     }
-    public function getBackJumpDistance():?float{
+    public function getBackJumpDistance(): ?float
+    {
         return $this->backJumpDistance_charac;
     }
-    public function setBackJumpDistance($backJumpDistance):void{
+    public function setBackJumpDistance($backJumpDistance): void
+    {
         $this->backJumpDistance_charac = $backJumpDistance;
     }
-    public function getJumpApex():?float{
+    public function getJumpApex(): ?float
+    {
         return $this->jumpApex_charac;
     }
-    public function setJumpApex($jumpApex):void{
+    public function setJumpApex($jumpApex): void
+    {
         $this->jumpApex_charac = $jumpApex;
     }
-    public function getCharacterCharac():?Character{
+    public function getCharacterCharac(): ?Character
+    {
         return $this->character_charac;
     }
-    public function setCharacterCharac(?Character $character):void{
+    public function setCharacterCharac(?Character $character): void
+    {
         $this->character_charac = $character;
     }
 
-    public function add(){
-        try{
+    public function add()
+    {
+        try {
             $requete = "INSERT INTO charac (hp_charac,throwRange_charac,fwdWalkSpeed_charac,backWalkSpeed_charac,fwdDashSpeed_charac,
                         backDashSpeed_charac,fwdDashDistance_charac,backDashDistance_charac,jumpSpeed_charac,fwdJumpDistance_charac,backJumpDistance_charac,jumpApex_charac,character_charac)
                         VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
@@ -131,40 +163,40 @@ class Charac extends BddConnect{
             $jumpApex_charac = $this->getJumpApex();
             $character_charac = $this->character_charac->getId();
             $req = $this->connexion()->prepare($requete);
-            $req->bindParam(1,$hp_charac,\PDO::PARAM_INT);
-            $req->bindParam(2,$throwRange_charac,\PDO::PARAM_INT);
-            $req->bindParam(3,$fwdWalkSpeed_charac,\PDO::PARAM_INT);
-            $req->bindParam(4,$backWalkSpeed_charac,\PDO::PARAM_INT);
-            $req->bindParam(5,$fwdDashSpeed_charac,\PDO::PARAM_INT);
-            $req->bindParam(6,$backDashSpeed_charac,\PDO::PARAM_INT);
-            $req->bindParam(7,$fwdDashDistance_charac,\PDO::PARAM_INT);
-            $req->bindParam(8,$backDashDistance_charac,\PDO::PARAM_INT);
-            $req->bindParam(9,$jumpSpeed_charac,\PDO::PARAM_STR);
-            $req->bindParam(10,$fwdJumpDistance_charac,\PDO::PARAM_INT);
-            $req->bindParam(11,$backJumpDistance_charac,\PDO::PARAM_INT);
-            $req->bindParam(12,$jumpApex_charac,\PDO::PARAM_INT);
-            $req->bindParam(13,$character_charac,\PDO::PARAM_INT);
+            $req->bindParam(1, $hp_charac, \PDO::PARAM_INT);
+            $req->bindParam(2, $throwRange_charac, \PDO::PARAM_INT);
+            $req->bindParam(3, $fwdWalkSpeed_charac, \PDO::PARAM_INT);
+            $req->bindParam(4, $backWalkSpeed_charac, \PDO::PARAM_INT);
+            $req->bindParam(5, $fwdDashSpeed_charac, \PDO::PARAM_INT);
+            $req->bindParam(6, $backDashSpeed_charac, \PDO::PARAM_INT);
+            $req->bindParam(7, $fwdDashDistance_charac, \PDO::PARAM_INT);
+            $req->bindParam(8, $backDashDistance_charac, \PDO::PARAM_INT);
+            $req->bindParam(9, $jumpSpeed_charac, \PDO::PARAM_STR);
+            $req->bindParam(10, $fwdJumpDistance_charac, \PDO::PARAM_INT);
+            $req->bindParam(11, $backJumpDistance_charac, \PDO::PARAM_INT);
+            $req->bindParam(12, $jumpApex_charac, \PDO::PARAM_INT);
+            $req->bindParam(13, $character_charac, \PDO::PARAM_INT);
             $req->execute();
-
-
-        }catch(\ErrorException $e){
-            die("erreur dans la fonction add".$e->getMessage());
+        } catch (\ErrorException $e) {
+            die("erreur dans la fonction add" . $e->getMessage());
         }
     }
 
-    public function findAll(){
-        try{
+    public function findAll()
+    {
+        try {
             $requete = "SELECT hp_charac,throwRange_charac,fwdWalkSpeed_charac,backWalkSpeed_charac,fwdDashSpeed_charac,
             backDashSpeed_charac,fwdDashDistance_charac,backDashDistance_charac,jumpSpeed_charac,fwdJumpDistance_charac,backJumpDistance_charac,jumpApex_charac,character_charac FROM Charac";
             $req = $this->connexion()->prepare($requete);
-            return $req->fetchAll(\PDO::FETCH_CLASS|\PDO::FETCH_PROPS_LATE,Charac::class);
-        }catch(\ErrorException $e ){
-            die("erreur dans la méthode findAll".$e->getMessage());
+            return $req->fetchAll(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, Charac::class);
+        } catch (\ErrorException $e) {
+            die("erreur dans la méthode findAll" . $e->getMessage());
         }
     }
 
-    public function find(){
-        try{
+    public function find()
+    {
+        try {
             $requete = "SELECT id_charac FROM Charac WHERE id_charac=?";
             $requete2 = "SELECT id_charac,hp_charac,throwRange_charac,fwdWalkSpeed_charac,backWalkSpeed_charac,fwdDashSpeed_charac,
             backDashSpeed_charac,fwdDashDistance_charac,backDashDistance_charac,jumpSpeed_charac,fwdJumpDistance_charac,backJumpDistance_charac,jumpApex_charac,
@@ -174,26 +206,23 @@ class Charac extends BddConnect{
             WHERE id_charac=? ";
             $id = $this->getId();
             $req = $this->connexion()->prepare($requete);
-            $req->bindParam(1,$id,\PDO::PARAM_INT);
+            $req->bindParam(1, $id, \PDO::PARAM_INT);
             $req->execute();
-            if($req->fetch()){
+            if ($req->fetch()) {
                 $req = $this->connexion()->prepare($requete2);
-                $req->bindParam(1,$id,\PDO::PARAM_INT);
+                $req->bindParam(1, $id, \PDO::PARAM_INT);
                 $req->execute();
-                $req->setFetchMode(\PDO::FETCH_CLASS|\PDO::FETCH_PROPS_LATE,Charac::class);
+                $req->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, Charac::class);
                 $charac = $req->fetch();
                 $charac->getCharacterCharac()->setId($charac->peronnage);
                 $charac->getCharacterCharac()->setNomCharacter($charac->nom);
                 $charac->getCharacterCharac()->setImageCharacter($charac->image);
-            }else{
+            } else {
                 $charac = null;
             }
             return $charac;
-        }catch(\Exception $e){
-            die("erreur dans la fonction find".$e->getMessage());
+        } catch (\Exception $e) {
+            die("erreur dans la fonction find" . $e->getMessage());
         }
     }
-
 }
-
-?>

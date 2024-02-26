@@ -7,12 +7,14 @@ use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\PHPMailer as PHPMailerPHPMailer;
 
-class Messagerie{
+class Messagerie
+{
 
-    public static function sendMail($destinataire,$objet,$contenu){
+    public static function sendMail($destinataire, $objet, $contenu)
+    {
         require './env.php';
         $mail = new PHPMailer(true);
-        try{
+        try {
             $mail->setLanguage('fr');
 
             $mail->SMTPDebug = SMTP::DEBUG_SERVER;
@@ -25,7 +27,7 @@ class Messagerie{
             $mail->Port = $port_messagerie;
 
             //reciptients
-            $mail->setFrom($login_messagerie,'Mailer');
+            $mail->setFrom($login_messagerie, 'Mailer');
             $mail->addAddress($destinataire);
 
             // content
@@ -34,11 +36,8 @@ class Messagerie{
             $mail->Body = $contenu;
 
             return $mail->send();
-        }catch(\Exception $e){
-            die ("le message n'a pas pu être envoyé : {$mail->ErrorInfo}");
+        } catch (\Exception $e) {
+            die("le message n'a pas pu être envoyé : {$mail->ErrorInfo}");
         }
-
     }
 }
-
-?>

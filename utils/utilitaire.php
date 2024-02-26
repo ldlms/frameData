@@ -1,15 +1,17 @@
 <?php
+
 namespace frameData\utils;
 
-class Utilitaire{
+class Utilitaire
+{
 
-    public static function cleanInput(?string $valeur):?string{
+    public static function cleanInput(?string $valeur): ?string
+    {
         return htmlspecialchars(strip_tags(trim($valeur)));
     }
 
-    public static function getFileExtension($file){
-        return substr(strrchr($file,'.'),1);
+    public static function getFileExtension($file)
+    {
+        return substr(strrchr($file, '.'), 1);
     }
 }
-
-?>

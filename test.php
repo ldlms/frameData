@@ -1,3 +1,2 @@
 <?php
-    echo 'Page de test';
-?>
+echo 'Page de test';
