@@ -79,5 +79,13 @@ class Utilisateur extends BddConnect
         }
     }
 
-    
+    public function find(){
+        try{
+            $request = "SELECT id_utilisateur,nom_utilisateur,mail_utilisateur,mdp_utilisateur FROM utilisateur WHERE id_utilisateur = ?";
+        }catch(\Exception $e){
+            die ("erreur dans la fonction find".$e);
+        }
+    }
+
+
 }

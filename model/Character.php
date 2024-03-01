@@ -10,9 +10,9 @@ use frameData\utils\BddConnect;
 class Character extends BddConnect
 {
 
-    private ?int $idCharacter;
-    private ?string $nomCharacter;
-    private ?string $imageCharacter;
+    private ?int $id_Character;
+    private ?string $nom_Character;
+    private ?string $image_Character;
 
     public function __construct()
     {
@@ -20,32 +20,32 @@ class Character extends BddConnect
 
     public function getId(): ?int
     {
-        return $this->idCharacter;
+        return $this->id_Character;
     }
 
     public function setId(?int $id)
     {
-        $this->idCharacter = $id;
+        $this->id_Character = $id;
     }
 
     public function getNomCharacter(): ?string
     {
-        return $this->nomCharacter;
+        return $this->nom_Character;
     }
 
     public function getImageCharacter(): ?string
     {
-        return $this->imageCharacter;
+        return $this->image_Character;
     }
 
     public function setNomCharacter(?string $nomCharacter): void
     {
-        $this->nomCharacter = $nomCharacter;
+        $this->nom_Character = $nomCharacter;
     }
 
     public function setImageCharacter(?string $imageCharacter): void
     {
-        $this->imageCharacter = $imageCharacter;
+        $this->image_Character = $imageCharacter;
     }
 
     // méthodes
@@ -87,7 +87,7 @@ class Character extends BddConnect
             $req = $this->connexion()->prepare('SELECT id_character, nom_character, image_character FROM `character` WHERE nom_character = ? AND image_character = ?');
             $req->bindParam(1, $nom, \PDO::PARAM_STR);
             $req->bindParam(2, $image, \PDO::PARAM_STR);
-            $req->setFetchMode(\PDO::FETCH_OBJ); //j'ai essayé de recup une classe mais on tombe vite dans une deprecation de propriétés dynamiques
+            $req->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, Character::class); //j'ai essayé de recup une classe mais on tombe vite dans une deprecation de propriétés dynamiques
             $req->execute();
             return $req->fetch();
         } catch (\Exception $e) {
