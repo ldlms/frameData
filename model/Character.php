@@ -83,10 +83,8 @@ class Character extends BddConnect
     {
         try {
             $nom = $this->getNomCharacter();
-            $image = $this->getImageCharacter();
-            $req = $this->connexion()->prepare('SELECT id_character, nom_character, image_character FROM `character` WHERE nom_character = ? AND image_character = ?');
+            $req = $this->connexion()->prepare('SELECT id_character, nom_character, image_character FROM `character` WHERE nom_character = ?');
             $req->bindParam(1, $nom, \PDO::PARAM_STR);
-            $req->bindParam(2, $image, \PDO::PARAM_STR);
             $req->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, Character::class); //j'ai essayé de recup une classe mais on tombe vite dans une deprecation de propriétés dynamiques
             $req->execute();
             return $req->fetch();
